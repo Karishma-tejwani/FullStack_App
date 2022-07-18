@@ -3,27 +3,27 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: [true, "name is required"]
     },
     email: {
         type: String,
-        required: true,
+        required: [true, "email required"],
         unique: true
     },
     job: {
         type: String,
-        required: true
+        required: [true, "job required"]
     },
     phone: {
         type: Number,
-        required: true
+        required: [true, "phone number required"]
     },
     address: {
         type: String,
-        required: true
+        required: [true, "address required"]
     },
 });
 
-const users = mongoose.model('users', userSchema);
+const user = mongoose.model('user', userSchema);
 
-module.exports = users;
+module.exports = user;
