@@ -37,4 +37,14 @@ const getdata = async(req, res) => {
     }
 }
 
-module.exports = {add, getdata};
+//Get individual user
+
+const getuser = async(req, res) => {
+    try{
+        console.log(req.params);
+    }catch(err){
+        res.status(404).json(err)
+    }
+}
+
+module.exports = {add, getdata, getuser};
