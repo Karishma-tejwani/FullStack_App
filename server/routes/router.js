@@ -1,30 +1,35 @@
 const express = require("express");
 const router = express.Router();
 const users = require("../models/userSchema");
+const userController = require("../Controllers/userController");
 
-router.post("/register", async(req, res) =>{
-    // console.log(req.body);
-    const {name, email, job, phone, address} = req.body;
+router.post("/add", userController.add);
 
-    if(!name || !email || !job || !phone || !address){
-        res.status(404).send("fill all required fields");
-    }
+// router.post("/add", async(req, res) =>{
 
-    try{
-        const user = await users.findOne({email: email});
-        if(user){
-            res.status(404).send("User already registered");
-        }else{
-            const addUser = new users({name, email, job, phone, address});
-            await addUser.save();
-            res.status(201).json(addUser);
-            console.log(addUser);
-        }
-    }
+//     const {name, email, job, phone, address} = req.body;
 
-    catch (error){ 
-        res.status(404).send(error);
-    }
-})
+//     if(!name || !email || !job || !phone || !address){
+//         res.status(404).send("fill all required fields");
+//     }
+
+//     try{
+//         const user = await users.findOne({email: email});
+//         console.log(user);
+        
+//         if(user){
+//             res.status(404).send("User already registered");
+//         }else{
+//             const addUser = new users({name, email, job, phone, address});
+//             await addUser.save();
+//             res.status(201).json(addUser);
+//             console.log(addUser);
+//         }
+//     }
+
+//     catch (error){ 
+//         res.status(404).send(error);
+//     }
+// })
 
 module.exports = router;
