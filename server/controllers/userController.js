@@ -1,50 +1,81 @@
 const users = require("../models/userSchema");
+const products = require("../models/productSchema");
 
-//Add User
+//register user
+
+
+//Add product
 const add = async (req, res) => {
     
     const { name, email, job, phone, address } = req.body;
 
     if (!name || !email || !job || !phone || !address) {
-      return res.status(404).json("Fill all the fields");
+      return res.status(422).json("Fill all the fields");
     }
     try {
-      const userExist = await users.findOne({ email: email });
-      console.log(userExist);
+      const productExist = await products.findOne({ email: email });
+      console.log(productExist);
 
-      if (userExist) {
-        return res.status(404).json({ error: "User Already Exist!" });
+      if (productExist) {
+        return res.status(422).json({ error: "product Already Exist!" });
       }
-      const user = new users({ name, email, job, phone, address });
-      const userAdd = await user.save();
-      if (userAdd) {
-        res.status(201).json({ msg: "User Added Successfulyy!" });
+      const product = new products({ name, email, job, phone, address });
+      const productAdd = await product.save();
+      if (productAdd) {
+        res.status(201).json({ msg: "product Added Successfulyy!" });
       }
-    } catch (err) {
-        res.status(404).json(err)
+    } catch (err){ 
+        res.status(422).json(err)
     }
 };
 
-//Get User Data
-
+//Get Product Data
 const getdata = async(req, res) => {
     try{
-        const userData = await users.find();
-        res.status(201).json(userData);
-        console.log(userData);
+        const productData = await products.find();
+        res.status(201).json(productData);
+        console.log(productData);
     }catch(err){
-        res.status(404).json(err)
+        res.status(422).json(err)
     }
 }
 
-//Get individual user
-
-const getuser = async(req, res) => {
+//Get individual product
+const getproduct = async(req, res) => {
     try{
         console.log(req.params);
+        const {id} = req.params;
+        const individualproduct = await products.findById({_id:id});
+        console.log(individualproduct);
+        res.status(201).json(individualproduct);
+
     }catch(err){
-        res.status(404).json(err)
+        res.status(422).json(err);
     }
 }
 
-module.exports = {add, getdata, getuser};
+//Update user data
+const updateproduct = async(req, res) => {
+  try {
+    const {id} = req.params;
+    const update = await products.findByIdAndUpdate(id, req.body, {new: true});
+    console.log(update);
+    res.status(201).json(update);
+  } catch (error) {
+    res.status(422).json(err);
+  }
+}
+
+//Delete product data
+const deleteproduct = async(req, res) => {
+  try {
+    const {id} = req.params;
+    const deleteproduct = await products.findByIdAndDelete(id);
+    console.log(deleteproduct);
+    res.status(201).json(deleteproduct);
+  } catch (error) {
+    res.status(422).json(err);
+  }
+}
+
+module.exports = {add, getdata, getproduct, updateproduct, deleteproduct};
