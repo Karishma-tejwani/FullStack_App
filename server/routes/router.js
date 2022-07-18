@@ -3,7 +3,7 @@ const router = express.Router();
 const users = require("../models/userSchema");
 const userController = require("../Controllers/userController");
 
-router.post("/add", userController.add);
+router.route("/add").post(userController.add);
 
 // router.post("/add", async(req, res) =>{
 
