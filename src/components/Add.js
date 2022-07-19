@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Add() {
 
+    const navigate = useNavigate();
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [job, setJob] = useState();
@@ -30,6 +31,7 @@ function Add() {
         }else{
             alert("Data Inserted!");
             console.log("Data Inserted!");
+            navigate('/');
         }
     }
 
@@ -54,14 +56,6 @@ function Add() {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
-                    {/* <div className="mb-3 col-lg-6 col-md-6 col-12">
-                        <label for="exampleInputPassword1" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" 
-                            name="password"
-                            value={password}
-                            onChange={setData}
-                        />
-                    </div> */}
                     <div className="mb-3 col-lg-6 col-md-6 col-12">
                         <label for="exampleInputJob" className="form-label">Job</label>
                         <input type="text" className="form-control" id="exampleInputJob" 
