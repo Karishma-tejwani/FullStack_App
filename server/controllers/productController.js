@@ -39,7 +39,6 @@ const getdata = async(req, res) => {
 //Get individual product
 const getproduct = async(req, res) => {
     try{
-        console.log(req.params);
         const {id} = req.params;
         const individualproduct = await products.findById({_id:id});
         console.log(individualproduct);

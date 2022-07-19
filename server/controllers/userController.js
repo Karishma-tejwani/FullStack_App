@@ -42,7 +42,6 @@ catch(err){
   } 
   
   const login=async (req, res) => {
-
     try{
       const {username, password} = req.body
       console.log(req.body)
