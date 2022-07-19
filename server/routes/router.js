@@ -4,7 +4,7 @@ const users = require("../models/userSchema");
 const products = require("../models/productSchema");
 const userController = require("../Controllers/userController");
 const productController = require("../Controllers/productController");
-const auth = require("../middlewares/")
+const auth = require("../middlewares/index");
 
 router.route("/add").post(productController.add);
 router.route("/getdata").get(productController.getdata);
