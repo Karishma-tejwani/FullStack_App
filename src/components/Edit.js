@@ -3,7 +3,7 @@ import { NavLink, useParams, useNavigate } from "react-router-dom";
 
 function Edit() {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [val, setVal] = useState({
     name: "",
